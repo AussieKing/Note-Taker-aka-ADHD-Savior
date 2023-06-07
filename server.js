@@ -53,9 +53,9 @@ app.delete('/api/notes/:id', (req, res) => {
     const id = req.params.id; // getting the notes with relative id from the request parameters
     const notesNew = notes.filter((note) => note.id !== id); // filtering the notes array to get the notes with id different from the one we want to delete
 
-    fs.writeFileSync(dbPath, JSON.stringify(notesNew), (err) => {
-        err ? console.error(err) : console.log('Note deleted from the database 🗑️');
-    });
+    fs.writeFileSync(dbPath, JSON.stringify(notesNew));
+    notes = notesNew;
+    console.log('Note deleted from the database 🗑️');
     res.json(notesNew);
 });
 
